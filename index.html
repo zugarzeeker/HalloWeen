@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>HaloWeen</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+
+		var isPlaying = false;
+
+		var x = '';
+
+		$(document).ready(function(e) {
+			var url = "http://research27.ml:8888/read";
+			setInterval(function() {
+				$.get(url, function(res) {
+					if (res == 'stop') {
+						navigator.vibrate(0);
+						clearInterval(x);
+						isPlaying = false;
+						console.log('stop')
+					}
+					else {
+						if (!isPlaying) {
+							isPlaying = true;
+							navigator.vibrate(5000);
+							x = setInterval(function() {
+								if (isPlaying) {
+									navigator.vibrate(5000);
+								}
+							}, 5500)
+						}
+					}
+				});
+			}, 1000);
+		});
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>
+
